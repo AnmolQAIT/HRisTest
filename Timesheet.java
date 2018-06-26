@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package MavenHris;
+package Login;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import static org.testng.Assert.*;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -18,7 +16,25 @@ public class Timesheet {
     {
         this.driver=driver;
     }
-    public boolean isloginpage() {
+   
+	public boolean isloginpage() {
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return this.driver.getCurrentUrl().equals("https://hris.qainfotech.com/login.php");
+	}
+	public String data()
+	{
+	 return driver.findElement(By.xpath("span[class='date ng-binding']")).getText();
+	}
+	
+	public boolean isTimesheetPage()
+	{
+		return this.driver.getCurrentUrl().equals("https://hris.qainfotech.com:8086/time/timesheet");
+	}
+	
+	public String logout()
+	{ driver.findElement(By.xpath("//*[@id=\"page\"]/div/div[1]/div[2]/ul/li/a/img")).click(); 
+		driver.findElement(By.xpath("//*[@id=\"page\"]/div/div[1]/div[2]/ul/li/ul/li[4]/a")).click();
+		return this.driver.getCurrentUrl();
+		
 	}
 }
