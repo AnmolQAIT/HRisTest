@@ -1,20 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package MavenHris;
+package Login;
 
 import org.openqa.selenium.*;
 import static org.testng.Assert.*;
+
+import java.awt.Window;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
  * @author anmol
  */
-public class Login {
+public class LoginMain {
     WebDriver driver;
-    public  Login(WebDriver driver) 
+    public  LoginMain(WebDriver driver) 
     {
         this.driver=driver;
     }
@@ -29,12 +27,13 @@ public class Login {
     }
     
     private void Enter(String username,String password)
-    {
-                gettextField().clear();
+    { driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        gettextField().clear();
 		gettextField().sendKeys(username);
 		getpasswordField().clear();
 		getpasswordField().sendKeys(password);
 		gettextField().submit();
+		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
     }
     
     public String LoginByInvalidCredentials(String username, String password) {
@@ -45,11 +44,12 @@ public class Login {
     public String LoginByBlankPassword(String username,String password)
     {
         Enter(username, password);
-        return driver.findElement(By.className("loginTxt")).getText();
+        return driver.findElement(By.id("txtPassword")).getAttribute("style");
     }
     public Timesheet LoginByCorrectCredentials(String username,String password)
     {
         Enter(username, password);
          return new Timesheet(driver);
     }
+   
 }
