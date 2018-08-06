@@ -41,7 +41,7 @@ public class Hris {
     @Test(priority=3)
     public void LoginWithCorrectCredentials()
     { 
-    	timesheet=login.LoginByCorrectCredentials("anmolaggarwal","Anmol@321#");
+    	timesheet=login.LoginByCorrectCredentials("anmolaggarwal","Anmol@1#");
         Assert.assertFalse(timesheet.isloginpage());
      }
     
